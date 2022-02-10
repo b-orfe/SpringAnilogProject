@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zdrv.mapper.ReviewMapper">
+
+	<resultMap id="ReviewMap" type="com.zdrv.domain.Review"
+		autoMapping="true">
+
+		<association property="animeName"
+			javaType="com.zdrv.domain.Anime">
+			<result property="animeName" column="anime_name" />
+		</association>
+
+	</resultMap>
+
+
+	<select id="selectAll" resultMap="ReviewMap">
+
+		select
+		users.name,
+		animes.anime_name,
+		reviews.score,
+		reviews.airicle
+		from reviews
+		left join animes
+		on reviews.anime_id = animes.anime_id
+		left join users
+		on reviews.user_id = users.id;
+
+
+	</select>
+
+
+</mapper>
