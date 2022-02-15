@@ -12,6 +12,6 @@ public class User {
 	@NotBlank
 	private String loginId;
 	private String loginPass;
-	private String Name;
+	private String name;
 	private Integer level;
 }

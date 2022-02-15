@@ -4,8 +4,13 @@ import lombok.Data;
 
 @Data
 public class Review {
-	private Anime animeName;
+	
+	private User user;
+	private Anime anime;
+	
 	private Integer score;
-	private String airicle;
+	
+	
+	private String article;
 
 }

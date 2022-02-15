@@ -7,21 +7,27 @@
 	<resultMap id="ReviewMap" type="com.zdrv.domain.Review"
 		autoMapping="true">
 
-		<association property="animeName"
+		<association property="anime"
 			javaType="com.zdrv.domain.Anime">
 			<result property="animeName" column="anime_name" />
+			<result property="animeId" column="anime_id" />
 		</association>
 
 	</resultMap>
 
-
+	
+	
+	
+	
+	
 	<select id="selectAll" resultMap="ReviewMap">
 
 		select
+		animes.anime_id,
 		users.name,
 		animes.anime_name,
 		reviews.score,
-		reviews.airicle
+		reviews.article
 		from reviews
 		left join animes
 		on reviews.anime_id = animes.anime_id
@@ -30,6 +36,58 @@
 
 
 	</select>
+
+	<select id="selectById" resultMap="ReviewMap">
+
+		select
+		user_id,
+		animes.anime_name,
+		animes.anime_id,
+		score,
+		article
+		from reviews
+		left join animes
+		on reviews.anime_id = animes.anime_id
+		where user_id =#{userId} and reviews.anime_id =#{animeId};
+
+	</select>
+
+	<insert id="insert" parameterType="com.zdrv.domain.Review">
+
+
+		insert into reviews
+		(user_id,anime_id,score,article)
+		value(#{user.id},#{anime.animeId},#{score},#{article})
+		on duplicate key
+		update
+		score=#{score},
+		article=#{article}
+
+
+
+
+
+	</insert>
+
+	<delete id="deleteById">
+		delete from reviews
+		where user_id=#{userId} and
+		anime_id=#{animeId}
+
+	</delete>
+
+
+	<update id="update" parameterType="com.zdrv.domain.Review" >
+
+		update reviews set
+		score =
+		#{score},
+		article = #{article}
+		where user_id =#{user.id} and anime_id=#{anime.animeId}
+
+
+	</update>
+
 
 
 </mapper>

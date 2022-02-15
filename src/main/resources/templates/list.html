@@ -3,19 +3,18 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>レビュー一覧</title>
+	<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
 	<link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
 	
-	<p>ようこそ。〇〇様</p>
-	
-	<p><a href="/list/addAnime">アニメ登録</a></p>
-	<p><a href="/list/addReview">レビュー登録</a></p>
-	
 	
 	<h1>～アニログ～</h1>
 	
+	<p th:text="'ようこそ。'+${session.user.name}+'様'"></p>
 	
+	
+	<p><a href="/list/addReview">レビュー登録</a></p>
 	
 	<h3>レビュー一覧</h3>
 	<table border="1">
@@ -24,13 +23,16 @@
 	<th>作品名</th>
 	<th>スコア</th>
 	<th>レビュー</th>
-	<th>操作</th>
+	<th colspan="2">操作</th>
 	</tr>
 	
 	<tr th:each="r:${reviews}">
-	<td th:text="${r.animeName.animeName}"></td>
+	<td th:text="${r.anime.animeName}"></td>
 	<td th:text="${r.score}"></td>
-	<td th:text="${r.airicle}"></td>
+	<td th:text="${r.article}"></td>
+	<td><a th:href="@{/list/edit/{id}(id=${r.anime.animeId})}">編集</a></td>
+	<td><a th:href="@{/list/delete/{id}(id=${r.anime.animeId})}">削除</a></td>
+	
 	</tr>
 	
 	</table>
@@ -40,6 +42,7 @@
 		<li th:each="a:${animes}" ><a th:href="@{/list/show/{id}(id=${a.animeId})}" th:text="${a.animeName}"></a></li>
 	</ul>
 	
+	<p><a th:href="@{/logout}"></a></p>
 	
 	
 </body>

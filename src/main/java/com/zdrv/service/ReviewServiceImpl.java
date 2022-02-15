@@ -22,23 +22,32 @@ public class ReviewServiceImpl implements ReviewService{
 		
 		return reviewmapper.selectAll();
 	}
+	
+	@Override
+	public Review getById(int userId, int animeId) {
+		
+		return reviewmapper.selectById(userId, animeId);
+	}
+	
 
 	@Override
 	public void insertRe(Review review) {
-		// TODO 自動生成されたメソッド・スタブ
 		
+		reviewmapper.insert(review);
 	}
 
 	@Override
-	public void deleteByIdRe(int id) {
-		// TODO 自動生成されたメソッド・スタブ
+	public void deleteByIdRe(int userId,int animeId) {
+		reviewmapper.deleteById(userId,animeId);
 		
 	}
 
 	@Override
 	public void updateRe(Review review) {
-		// TODO 自動生成されたメソッド・スタブ
+		reviewmapper.update(review);
 		
 	}
+
+	
 
 }
