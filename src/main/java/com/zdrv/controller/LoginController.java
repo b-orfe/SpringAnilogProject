@@ -1,15 +1,18 @@
 package com.zdrv.controller;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.zdrv.domain.AddGroup;
+import com.zdrv.domain.LoginGroup;
 import com.zdrv.domain.User;
 import com.zdrv.service.UserServiceImpl;
 
@@ -26,7 +29,7 @@ public class LoginController {
 	}
 	
 	@PostMapping("/login")
-	public String loginPost(HttpSession session, @Valid User user,Errors errors) {
+	public String loginPost(HttpSession session, @Validated(LoginGroup.class) User user,Errors errors) {
 		if(errors.hasErrors()) {
 			return "login";
 		}
@@ -48,4 +51,39 @@ public class LoginController {
 		session.invalidate();
 		return "redirect:/login";
 	}
+	
+	@GetMapping("/newAccount")
+	public String newAccount(Model model) {
+		model.addAttribute("user",new User());
+		return "newAccount";
+	}
+	
+	@PostMapping("/newAccount")
+	public String newAccountPost(@Validated(AddGroup.class) User user,Errors errors) {
+		
+		if(errors.hasErrors()) {
+			
+			return "newAccount";
+		}
+		
+		String conf = user.getConfPass();
+		
+		if(!user.getLoginPass().equals(conf)) {
+			
+			errors.rejectValue("confPass", "not.same.pass");
+			return "newAccount";
+		}
+		
+		
+		String hashed = BCrypt.hashpw(user.getLoginPass(), BCrypt.gensalt());
+		
+		user.setLoginPass(hashed);
+		
+		userservice.insertUser(user);
+		return "addDone";
+	}
+	
+	
+	
+	
 }

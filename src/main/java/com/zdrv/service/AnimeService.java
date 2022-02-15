@@ -1,8 +1,10 @@
 package com.zdrv.service;
 
+import java.util.List;
+
 import com.zdrv.domain.Anime;
 
 public interface AnimeService {
-	Anime getAll();
+	List<Anime> getAll();
 	Anime getById(int id);
 }

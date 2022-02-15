@@ -2,30 +2,32 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8" />
-	<title>ログインページ</title>
+	<title>新規登録</title>
 	<link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
-	<h1>ログイン</h1>
-	
-	<p><a th:href="@{/newAccount}">新規登録</a></p>
-	
+	<h1>新規登録</h1>
 	
 	<form action="" method="post" th:object="${user}">
-	<p th:errors="*{loginId}"></p>
-	<p th:errors="*{loginPass}"></p>
 	
-	
-	<p>ログインID：
-	<input type="text"  th:field="*{loginId}"/>
+	<p>名前：
+	<input type="text" th:field="*{name}"/>
 	</p>
 	
-	<p>パスワード:
+	<p>ログインID：
+	<input type="text" th:field="*{loginId}"/>
+	</p>
+	
+	<p>パスワード：
 	<input type="password" th:field="*{loginPass}"/>
 	</p>
 	
+	<p>パスワード確認用:
+	<input type="password" th:field="*{confPass}"/>
+	</p>
 	
-	<input type="submit" value="ログイン" />
+	<input type="submit" value="登録" />
+	
 	</form>
 	
 	

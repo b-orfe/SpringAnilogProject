@@ -12,7 +12,7 @@
 	<h1>～アニログ～</h1>
 	
 	<p th:text="'ようこそ。'+${session.user.name}+'様'"></p>
-	<p><a href="/logout">ログアウト</a></p>
+	<p><a th:href="@{/logout}">ログアウト</a></p>
 	
 	
 	<p><a href="/list/addReview">レビュー登録</a></p>
@@ -43,7 +43,7 @@
 		<li th:each="a:${animes}" ><a th:href="@{/list/show/{id}(id=${a.animeId})}" th:text="${a.animeName}"></a></li>
 	</ul>
 	
-	<p><a th:href="@{/logout}"></a></p>
+	
 	
 	
 </body>

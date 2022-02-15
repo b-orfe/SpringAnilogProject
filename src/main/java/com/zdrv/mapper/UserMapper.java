@@ -7,4 +7,5 @@ import com.zdrv.domain.User;
 @Mapper
 public interface UserMapper {
 	User findByLoginId(String LoginId);
+	void insert(User user);
 }
