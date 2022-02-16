@@ -34,7 +34,9 @@ public class ReviewController {
 	@GetMapping
 	public String list(Model model) {
 		
-		model.addAttribute("reviews",rsimpl.getAllReview());
+		User user = (User)session.getAttribute("user");
+		
+		model.addAttribute("reviews",rsimpl.allGetById(user.getId()));
 		model.addAttribute("animes",aniimpl.getAll());
 		
 		

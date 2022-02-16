@@ -12,6 +12,8 @@ public interface ReviewMapper {
 	//一覧
 	List<Review> selectAll();
 	
+	List<Review> allSelectById(int userId);
+	List<Review> animeSelectById(int animeId);
 	Review selectById(int userId,int animeId);
 
 	//追加

@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>[[${anime.animeName}]]</title>
+	<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
 	<link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
@@ -10,29 +11,47 @@
 	
 	<table border="1">
 	
-	<th:block th:each="a:${anime}">
+	<th:block th:each="a:${anime}" th:object="${a}">
 	<tr >
 	<th>アニメタイトル</th>
-	<td th:text="${a.animeName}"></td>
+	<td th:text="*{animeName}"></td>
 	</tr>
 	
 	<tr>
 	<th>監督</th>
-	<td th:text="${a.directedBy}"></td>
+	<td th:text="*{directedBy}"></td>
 	</tr>
 	
 	<tr>
 	<th>制作会社</th>
-	<td th:text="${a.companyBy}"></td>
+	<td th:text="*{companyBy}"></td>
 	</tr>
 	
 	<tr>
 	<th>公式サイト</th>
-	<td th:text="${a.sourceBy}"></td>
+	<td th:text="*{sourceBy}"></td>
+	
+	</tr>
+	</th:block>
+	</table>
+	
+	<h1>みんなのレビュー</h1>
+	
+	<table border="1">
+	<tr>
+	<th>スコア</th>
+	<th>レビュー</th>
+	</tr>
+	
+	<tr th:each="anime:${review}" th:object="${anime}">
+	<td th:text="*{score}"></td>
+	<td th:text="*{article}"></td>
 	
 	</tr>
 	
-	</th:block>
+	
 	</table>
+	
+	
 </body>
 </html>

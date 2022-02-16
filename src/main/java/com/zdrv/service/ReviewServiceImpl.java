@@ -48,6 +48,18 @@ public class ReviewServiceImpl implements ReviewService{
 		
 	}
 
+	@Override
+	public List<Review> allGetById(int userId) {
+		
+		return reviewmapper.allSelectById(userId);
+	}
+
+	@Override
+	public List<Review> animeGetById(int animeId) {
+		// 
+		return reviewmapper.animeSelectById(animeId);
+	}
+
 	
 
 }

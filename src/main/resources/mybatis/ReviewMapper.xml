@@ -51,6 +51,38 @@
 		where user_id =#{userId} and reviews.anime_id =#{animeId};
 
 	</select>
+	
+	<select id="allSelectById" resultMap="ReviewMap" parameterType="int">
+
+		select
+		user_id,
+		animes.anime_name,
+		animes.anime_id,
+		score,
+		article
+		from reviews
+		left join animes
+		on reviews.anime_id = animes.anime_id
+		where user_id =#{x};
+
+	</select>
+	
+	<select id="animeSelectById" resultMap="ReviewMap" parameterType="int">
+
+		 select
+		animes.anime_id,
+		users.name,
+		animes.anime_name,
+		reviews.score,
+		reviews.article
+		from reviews
+		left join animes
+		on reviews.anime_id = animes.anime_id
+		left join users
+		on reviews.user_id = users.id
+        where animes.anime_id=#{x};
+
+	</select>
 
 	<insert id="insert" parameterType="com.zdrv.domain.Review">
 
