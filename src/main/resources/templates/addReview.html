@@ -3,10 +3,11 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>レビュー追加</title>
+	<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
 	<link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
-	<h1>新規レビュー追加</h1>
+	<h1>レビュー追加</h1>
 	
 	<form action="" method="post" th:object="${review}">
 	
@@ -23,9 +24,9 @@
 	
 	</p>
 	
-	<p>感想:
+	<p>感想:</p>
 	<textarea th:field="*{article}" cols="30" rows="10"></textarea>
-	</p>
+	
 	
 	<input type="submit" />
 	</form>

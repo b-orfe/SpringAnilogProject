@@ -3,22 +3,29 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>レビュー一覧</title>
-	<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+	<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+	<script th:src="@{/js/dialog.js}" defer="defer"></script>
+	
 	<link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
 	
+	<div class="body">
+	
 	<div class="header">
-	<h1>～アニログ～</h1>
+	<img src="/images/anilog2.png" alt="anilog" />
 	</div>
 	
-	<p>ようこそ。<a th:href="@{/mypage}">[[${session.user.name}]]</a>様></p>
+	
+	<h3>ようこそ。<a th:href="@{/mypage}">[[${session.user.name}]]</a>様</h3>
 	<p><a th:href="@{/logout}">ログアウト</a></p>
 	
 	
 	<p><a href="/list/addReview">レビュー登録</a></p>
 	
 	<h3>レビュー一覧</h3>
+	
+	
 	<table border="1">
 	
 	<tr>
@@ -32,8 +39,8 @@
 	<td th:text="${r.anime.animeName}"></td>
 	<td th:text="${r.score}"></td>
 	<td th:text="${r.article}"></td>
-	<td><a th:href="@{/list/edit/{id}(id=${r.anime.animeId})}">編集</a></td>
-	<td><a th:href="@{/list/delete/{id}(id=${r.anime.animeId})}">削除</a></td>
+	<td><a class="button" th:href="@{/list/edit/{id}(id=${r.anime.animeId})}">編集</a></td>
+	<td><a class="button delete-action" th:href="@{/list/delete/{id}(id=${r.anime.animeId})}">削除</a></td>
 	
 	</tr>
 	
@@ -41,11 +48,11 @@
 	
 	<h3>アニメ一覧</h3>
 	<ul >
-		<li th:each="a:${animes}" ><a th:href="@{/list/show/{id}(id=${a.animeId})}" th:text="${a.animeName}"></a></li>
+		<li th:each="a:${animes}" ><a class="button" th:href="@{/list/show/{id}(id=${a.animeId})}" th:text="${a.animeName}"></a></li>
 	</ul>
 	
 	
-	
+	</div>
 	
 </body>
 </html>

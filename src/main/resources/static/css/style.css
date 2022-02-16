@@ -1,33 +1,84 @@
-.header{
+.header {
 	background-image: url("/images/anime_bg_image1.jpg");
+	text-align: center;
+	width: 950px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-
-
-h3{
-	
+h3 {
 	color: #333;
-}
-
-body{
-	
-	color:#333;
-	background-image:url("/images/haikei.jpg");
+	font-size:22px;
 	
 }
 
-th,td{
-	border:solid 1px;
+body {
+	color: #333;
+	background-image: url("/images/haikei.jpg");
+	
 }
-table{
+
+th, td {
+	border: solid 1px;
+}
+
+table {
 	border-collapse: collapse;
+	margin-left: auto;
+	margin-right: auto;
+	width:950px;
 }
 
-th{
-	width:300px;
+
+
+th {
+	width: 300px;
 	height: 80px;
 }
 
-tr{
+tr {
 	background-color: white;
+}
+
+.button {
+	display: inline-block;
+	border-radius: 5%; /* 角丸       */
+	font-size: 12pt; /* 文字サイズ */
+	text-align: center; /* 文字位置   */
+	cursor: pointer; /* カーソル   */
+	padding: 12px 12px; /* 余白       */
+	background: #000066; /* 背景色     */
+	color: #fff;
+}
+
+a:visited{
+	color:inherit;
+}
+
+.button:visited {
+	color: #fff;
+}
+
+.button:hover {
+	box-shadow: none; /* カーソル時の影消去 */
+	color: #000066; /* 背景色     */
+	background: #ffffff; /* 文字色     */
+}
+
+img {
+	object-fit: cover;
+	width: 50%;
+	height: 40%;
+	background-position: 50% 50%;
+	height: 40%;
+}
+
+p {
+	font-size: 16px;
+}
+
+.body{
+	margin-left: auto;
+	margin-right: auto;
+	width:950px;
 }
