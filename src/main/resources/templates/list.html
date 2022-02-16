@@ -8,10 +8,11 @@
 </head>
 <body>
 	
-	
+	<div class="header">
 	<h1>～アニログ～</h1>
+	</div>
 	
-	<p th:text="'ようこそ。'+${session.user.name}+'様'"></p>
+	<p>ようこそ。<a th:href="@{/mypage}">[[${session.user.name}]]</a>様></p>
 	<p><a th:href="@{/logout}">ログアウト</a></p>
 	
 	

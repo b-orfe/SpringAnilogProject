@@ -17,10 +17,13 @@ import com.zdrv.domain.User;
 import com.zdrv.service.UserServiceImpl;
 
 @Controller
-public class LoginController {
+public class UserController {
 
 	@Autowired
 	UserServiceImpl userservice;
+	
+	@Autowired
+	HttpSession session;
 	
 	@GetMapping("/login")
 	public String login(Model model) {
@@ -83,7 +86,12 @@ public class LoginController {
 		return "addDone";
 	}
 	
-	
+	@GetMapping("/mypage")
+	public String mypage(Model model) {
+		model.addAttribute("user",session.getAttribute("user"));
+		return "mypage";
+		
+	}
 	
 	
 }
