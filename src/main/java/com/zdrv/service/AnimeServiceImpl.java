@@ -28,4 +28,18 @@ public class AnimeServiceImpl implements AnimeService{
 		return animemapper.selectAll();
 	}
 
+	
+
+	@Override
+	public List<Anime> limitAnimes(int offset, int num) {
+		
+		return animemapper.getLimitedAnimes(offset, num);
+	}
+
+	@Override
+	public Long countAnimes() {
+		
+		return animemapper.countAnimes();
+	}
+
 }

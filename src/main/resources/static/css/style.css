@@ -8,7 +8,8 @@
 
 h3 {
 	color: #333;
-	font-size:22px;
+	font-size:28px;
+	
 	
 }
 
@@ -74,11 +75,42 @@ img {
 }
 
 p {
-	font-size: 16px;
+	font-size: 22px;
 }
 
 .body{
 	margin-left: auto;
 	margin-right: auto;
 	width:950px;
+	background-color: #fdf8e6;
+}
+.copy{
+	text-align: center;
+}
+.body_add{
+	margin-left: auto;
+	margin-right: auto;
+	width:950px;
+	background-color: #fdf8e6;
+	text-align: center;
+}
+.container{
+	margin:0 auto;
+}
+
+.btn--orange,
+a.btn--orange {
+  color: #fff;
+  background-color: #0080ff;
+  
+ 
+}
+.btn--orange:hover,
+a.btn--orange:hover {
+  color: #0080ff;
+  background: #ffffff;
+}
+
+a.btn--radius {
+   border-radius: 100vh;
 }

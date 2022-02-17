@@ -1,5 +1,7 @@
 package com.zdrv.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.zdrv.domain.Anime;
 import com.zdrv.domain.Review;
 import com.zdrv.domain.User;
 import com.zdrv.service.AnimeService;
@@ -32,12 +36,26 @@ public class ReviewController {
 	 AnimeService aniimpl;
 	
 	@GetMapping
-	public String list(Model model) {
+	public String list(Model model, @RequestParam(defaultValue="1") Integer page) {
 		
-		User user = (User)session.getAttribute("user");
+		User user = (User) session.getAttribute("user");
 		
-		model.addAttribute("reviews",rsimpl.allGetById(user.getId()));
-		model.addAttribute("animes",aniimpl.getAll());
+		model.addAttribute("reviews", rsimpl.allGetById(user.getId()));
+		
+		int numPerPage = 6;
+		Long count = aniimpl.countAnimes();
+		
+		int totalPages = (int) Math.ceil((double) count / numPerPage);
+		
+		int offset = numPerPage * (page - 1);
+		
+		
+		List<Anime> animes = aniimpl.limitAnimes(offset, numPerPage);
+		System.out.println(animes);
+		
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("page", page);
+		model.addAttribute("animes", animes);
 		
 		
 		return "list";

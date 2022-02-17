@@ -5,8 +5,10 @@
 	<title>[[${anime.animeName}]]</title>
 	<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
 	<link rel="stylesheet" th:href="@{/css/style.css}" />
+	<link rel="icon" th:href="@{/favicon/favicon.ico}" />
 </head>
 <body>
+	<div class="body">
 	<h1>アニメ詳細</h1>
 	
 	<table border="1">
@@ -52,6 +54,8 @@
 	
 	</table>
 	
+	<p><a th:href="@{/list}">ホーム</a></p>
 	
+	</div>
 </body>
 </html>

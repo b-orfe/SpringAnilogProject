@@ -18,4 +18,16 @@
 	where anime_id =#{id}
 	
 	</select>
+	
+	
+	<select id="countAnimes" resultType="long">
+		select count(*) from animes
+	</select>
+	
+	<select id="getLimitedAnimes" resultType="com.zdrv.domain.Anime">
+	select * from animes
+	limit #{offset},#{num}
+	
+	</select>
+	
 </mapper>
