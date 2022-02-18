@@ -13,4 +13,5 @@ public interface AnimeMapper {
 	Anime selectById(int id);
 	Long countAnimes();
 	List<Anime> getLimitedAnimes(@Param("offset") int offset,@Param("num") int num);
+	List<Anime> searchAnime(String moji);
 }

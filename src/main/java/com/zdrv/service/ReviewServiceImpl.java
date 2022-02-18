@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zdrv.domain.Inquiry;
 import com.zdrv.domain.Review;
 import com.zdrv.mapper.ReviewMapper;
 
@@ -56,8 +57,14 @@ public class ReviewServiceImpl implements ReviewService{
 
 	@Override
 	public List<Review> animeGetById(int animeId) {
-		// 
+		
 		return reviewmapper.animeSelectById(animeId);
+	}
+
+	@Override
+	public void getInquiry(Inquiry inquiry) {
+		reviewmapper.addInquiry(inquiry);
+		
 	}
 
 	

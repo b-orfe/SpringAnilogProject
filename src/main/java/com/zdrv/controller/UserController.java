@@ -62,10 +62,10 @@ public class UserController {
 	}
 	
 	@PostMapping("/newAccount")
-	public String newAccountPost(@Validated(AddGroup.class) User user,Errors errors) {
+	public String newAccountPost(@Validated(AddGroup.class) User user,Errors errors,Model model) {
 		
 		if(errors.hasErrors()) {
-			
+			model.addAttribute("user", user);
 			return "newAccount";
 		}
 		

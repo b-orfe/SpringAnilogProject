@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.zdrv.domain.Inquiry;
 import com.zdrv.domain.Review;
 
 @Mapper
@@ -24,5 +25,7 @@ public interface ReviewMapper {
 
 	//更新
 	void update(Review review);
+	
+	void addInquiry(Inquiry inquiry);
 
 }

@@ -11,6 +11,12 @@
 <div class="body_add">
 	<h1>新規登録</h1>
 	
+	<div style="color:red;" th:object="${user}">
+	<p th:errors="*{name}"></p>
+	<p th:errors="*{loginId}"></p>
+	<p th:errors="*{loginPass}"></p>
+	</div>
+	
 	<form action="" method="post" th:object="${user}">
 	
 	<p>名前：

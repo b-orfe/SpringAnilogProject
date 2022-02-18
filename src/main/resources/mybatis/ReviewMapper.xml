@@ -15,11 +15,11 @@
 
 	</resultMap>
 
-	
-	
-	
-	
-	
+
+
+
+
+
 	<select id="selectAll" resultMap="ReviewMap">
 
 		select
@@ -46,13 +46,16 @@
 		score,
 		article
 		from reviews
-		left join animes
+		left join
+		animes
 		on reviews.anime_id = animes.anime_id
-		where user_id =#{userId} and reviews.anime_id =#{animeId};
+		where user_id =#{userId}
+		and reviews.anime_id =#{animeId};
 
 	</select>
-	
-	<select id="allSelectById" resultMap="ReviewMap" parameterType="int">
+
+	<select id="allSelectById" resultMap="ReviewMap"
+		parameterType="int">
 
 		select
 		user_id,
@@ -62,14 +65,16 @@
 		article
 		from reviews
 		left join animes
-		on reviews.anime_id = animes.anime_id
+		on reviews.anime_id =
+		animes.anime_id
 		where user_id =#{x};
 
 	</select>
-	
-	<select id="animeSelectById" resultMap="ReviewMap" parameterType="int">
 
-		 select
+	<select id="animeSelectById" resultMap="ReviewMap"
+		parameterType="int">
+
+		select
 		animes.anime_id,
 		users.name,
 		animes.anime_name,
@@ -77,10 +82,11 @@
 		reviews.article
 		from reviews
 		left join animes
-		on reviews.anime_id = animes.anime_id
+		on reviews.anime_id =
+		animes.anime_id
 		left join users
 		on reviews.user_id = users.id
-        where animes.anime_id=#{x};
+		where animes.anime_id=#{x};
 
 	</select>
 
@@ -109,17 +115,23 @@
 	</delete>
 
 
-	<update id="update" parameterType="com.zdrv.domain.Review" >
+	<update id="update" parameterType="com.zdrv.domain.Review">
 
 		update reviews set
 		score =
 		#{score},
 		article = #{article}
-		where user_id =#{user.id} and anime_id=#{anime.animeId}
+		where user_id
+		=#{user.id} and anime_id=#{anime.animeId}
 
 
 	</update>
 
+	<insert id="addInquiry" parameterType="com.zdrv.domain.Inquiry">
+		insert into inquiry
+		(user_id,title,text)
+		value(#{userId},#{title},#{text});
 
+	</insert>
 
 </mapper>

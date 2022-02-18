@@ -9,5 +9,8 @@ public interface AnimeService {
 	Anime getById(int id);
 	Long countAnimes();
 	List<Anime> limitAnimes(int offset,int num);
+	List<Anime> getAnimes(Integer page);
+	List<Anime> getSearchAnimes(String moji);
+	int totalPages();
 	
 }

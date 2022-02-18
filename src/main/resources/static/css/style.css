@@ -83,6 +83,7 @@ p {
 	margin-right: auto;
 	width:950px;
 	background-color: #fdf8e6;
+	
 }
 .copy{
 	text-align: center;
@@ -93,6 +94,7 @@ p {
 	width:950px;
 	background-color: #fdf8e6;
 	text-align: center;
+	
 }
 .container{
 	margin:0 auto;
@@ -113,4 +115,18 @@ a.btn--orange:hover {
 
 a.btn--radius {
    border-radius: 100vh;
+}
+
+.footer {
+	text-align:  right;
+}
+.footer a{
+	color:blue;
+	
+}
+.body h3 a{
+	color:#0080ff;
+}
+.body h3 a:visited{
+	color:#0080ff;
 }

@@ -1,7 +1,5 @@
 package com.zdrv.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -15,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.zdrv.domain.Anime;
+import com.zdrv.domain.Inquiry;
 import com.zdrv.domain.Review;
 import com.zdrv.domain.User;
 import com.zdrv.service.AnimeService;
@@ -36,31 +34,26 @@ public class ReviewController {
 	 AnimeService aniimpl;
 	
 	@GetMapping
-	public String list(Model model, @RequestParam(defaultValue="1") Integer page) {
+	public String list(Model model, @RequestParam(defaultValue="1") Integer page ) {
 		
 		User user = (User) session.getAttribute("user");
-		
 		model.addAttribute("reviews", rsimpl.allGetById(user.getId()));
-		
-		int numPerPage = 6;
-		Long count = aniimpl.countAnimes();
-		
-		int totalPages = (int) Math.ceil((double) count / numPerPage);
-		
-		int offset = numPerPage * (page - 1);
-		
-		
-		List<Anime> animes = aniimpl.limitAnimes(offset, numPerPage);
-		System.out.println(animes);
-		
-		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("totalPages", aniimpl.totalPages());
 		model.addAttribute("page", page);
-		model.addAttribute("animes", animes);
-		
-		
+		model.addAttribute("animes", aniimpl.getAnimes(page));
 		return "list";
 	}
 	
+	@PostMapping
+	public String postList(Model model,@RequestParam String moji,@RequestParam(defaultValue="1") Integer page) {	
+		User user = (User) session.getAttribute("user");
+		model.addAttribute("reviews", rsimpl.allGetById(user.getId()));
+		model.addAttribute("totalPages", aniimpl.totalPages());
+		model.addAttribute("page", page);
+		model.addAttribute("animes", aniimpl.getAnimes(page));
+		model.addAttribute("search",aniimpl.getSearchAnimes(moji)); 
+		return "list";
+	}
 	
 	@GetMapping("/addReview")
 	public String addReview(Model model) {
@@ -94,7 +87,7 @@ public class ReviewController {
 	
 	@GetMapping("/edit/{animeId}")
 	public String edit(@PathVariable int animeId ,Model model) {
-		User user = (User)session.getAttribute("user");
+		User user = (User) session.getAttribute("user");
 		model.addAttribute("review",rsimpl.getById(user.getId(),animeId));
 		model.addAttribute("animes",aniimpl.getById(animeId));
 		
@@ -117,5 +110,31 @@ public class ReviewController {
 		
 	}
 	
+	@GetMapping("/inquiry")
+	public String inquiry(Model model) {
+		User user=(User)session.getAttribute("user");
+		Inquiry inquiry = new Inquiry();
+		inquiry.setUserId(user.getLoginId());
+		model.addAttribute("inquiry", inquiry);
+		model.addAttribute("user",user);
+		return "Inquiry" ;
+	}
 	
+	@PostMapping("/inquiry")
+	public String inquiry(@Valid Inquiry inquiry,Errors errors,Model model) {
+		
+		if(errors.hasErrors()) {
+			model.addAttribute("inquiry",inquiry);
+			return "Inquiry";
+		}
+		
+		rsimpl.getInquiry(inquiry);
+		return "redirect:/inquiry/done";
+	}
+	
+	@GetMapping("/inquiry/done")
+	public String inquiryDone() {
+		return "addInquiry";
+	}
+
 }
